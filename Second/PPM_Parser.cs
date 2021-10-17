@@ -151,7 +151,15 @@ namespace Second
         private void GetColorFromString(ref int index)
         {
             if (_stringBuilder.Length <= 0) return;
-            _imageData[index] = (byte) convert(_stringBuilder.ToString());
+            if (_maxCount > 255)
+            {
+                _imageData[index] = (byte) (convert(_stringBuilder.ToString()) >> 8);
+            }
+            else
+            {
+                _imageData[index] = (byte) convert(_stringBuilder.ToString());
+            }
+
             index++;
             _stringBuilder.Clear();
         }
